@@ -49,9 +49,9 @@ const BannerSlider = () => {
     };
 
     return (
-        <div className="slideshow relative">
+        <div className="slideshow relative max-w-screen-2xl mx-auto">
             {/* Контейнер для слайдера */}
-            <div ref={sliderRef} className="relative h-[650px] w-full overflow-hidden">
+            <div ref={sliderRef} className="relative h-[350px] w-full overflow-hidden">
                 {/* Слайды */}
                 <div className="swiper-wrapper">
                     {banners.map((banner, index) => (
@@ -72,10 +72,10 @@ const BannerSlider = () => {
                     ))}
                 </div>
 
-                {/* Кнопки навигации */}
+                {/* Кнопки навигации - теперь с дополнительным отступом от края */}
                 <button
                     onClick={prevSlide}
-                    className="swiper-button-prev"
+                    className="swiper-button-prev left-8"
                     aria-label="Предыдущий слайд"
                 >
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -84,7 +84,7 @@ const BannerSlider = () => {
                 </button>
                 <button
                     onClick={nextSlide}
-                    className="swiper-button-next"
+                    className="swiper-button-next right-8"
                     aria-label="Следующий слайд"
                 >
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

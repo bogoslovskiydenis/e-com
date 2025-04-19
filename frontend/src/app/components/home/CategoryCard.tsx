@@ -1,34 +1,88 @@
-import Image from "next/image";
+"use client";
+
+import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
-interface CategoryCardProps {
-    image: string;
-    title: string;
-    href: string;
-}
-
-const CategoryCard = ({ image, title, href }: CategoryCardProps) => {
+const CategoryCard = ({ image, title, link }) => {
     return (
-        <Link href={href} className="block group relative h-[500px] overflow-hidden">
-            <Image
-                src={image}
-                alt={title}
-                fill
-                style={{ objectFit: "cover" }}
-                className="group-hover:scale-105 transition duration-500"
-            />
-            <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
+        <div className="category-wall__item group">
+            <div className="relative overflow-hidden h-[600px]">
+                {/* Background Image */}
+                <Image
+                    src={image}
+                    alt={title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    priority
+                    style={{ objectFit: "cover" }}
+                    className="transition-transform duration-700 group-hover:scale-105"
+                />
 
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
-                <h3 className="text-3xl font-bold mb-2">{title}</h3>
-                <div className="mt-3">
-                    <button className="bg-white text-black px-6 py-2 hover:bg-black hover:text-white border border-white transition-colors text-sm uppercase">
-                        Перейти до каталогу
-                    </button>
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors duration-300"></div>
+
+                {/* Content */}
+                <div className="category-wall__wrap">
+                    <h3 className="category-wall__title mb-6">{title}</h3>
+                    <Link href={link}>
+                        <span className="category-wall__btn bg-white text-black px-8 py-3 hover:bg-black hover:text-white border border-white transition-colors duration-300">
+                            ПЕРЕЙТИ ДО КАТАЛОГУ
+                        </span>
+                    </Link>
                 </div>
             </div>
-        </Link>
+        </div>
     );
 };
 
-export default CategoryCard;
+const CategoriesSection = () => {
+    const categories = [
+        {
+            title: "ЖІНОЧА ЛІНІЯ",
+            image: "/images/category-women.jpg",
+            link: "/catalog/women"
+        },
+        {
+            title: "ЧОЛОВІЧА ЛІНІЯ",
+            image: "/images/category-men.jpg",
+            link: "/catalog/men"
+        },
+        {
+            title: "АКСЕСУАРИ",
+            image: "/images/category-accessories.jpg",
+            link: "/catalog/accessories"
+        }
+    ];
+
+    return (
+        <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <h2 className="text-center text-3xl md:text-4xl font-bold mb-12">
+                ІНТЕРНЕТ-МАГАЗИН ВЕРХНЬОГО ОДЯГУ PARADISE-STORE
+            </h2>
+            <div className="category-wall__inner">
+                {categories.map((category, index) => (
+                    <CategoryCard
+                        key={index}
+                        title={category.title}
+                        image={category.image}
+                        link={category.link}
+                    />
+                ))}
+            </div>
+
+            {/* About section */}
+            <div className="mt-16 max-w-4xl mx-auto text-center">
+                <h3 className="text-2xl font-semibold mb-6">Про наш магазин</h3>
+                <p className="text-gray-700 mb-4">
+                    Paradise Store - це інтернет-магазин верхнього одягу, де Ви знайдете якісні пальта, куртки, тренчі та аксесуари за доступними цінами.
+                </p>
+                <p className="text-gray-700">
+                    Ми спеціалізуємося на виробництві стильного верхнього одягу для чоловіків і жінок, дотримуючись найвищих стандартів якості та актуальних модних тенденцій.
+                </p>
+            </div>
+        </section>
+    );
+};
+
+export default CategoriesSection;
