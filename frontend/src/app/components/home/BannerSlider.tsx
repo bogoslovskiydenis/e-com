@@ -17,7 +17,7 @@ const BannerSlider = () => {
         },
         {
             id: 2,
-            image: "/images/banner-2.jpg",
+            image: "/images/banner-2.png",
             alt: "Second Banner",
             link: "/catalog/new"
         },

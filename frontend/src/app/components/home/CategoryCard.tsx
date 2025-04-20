@@ -7,7 +7,7 @@ import Image from "next/image";
 const CategoryCard = ({ image, title, link }) => {
     return (
         <div className="category-wall__item group">
-            <div className="relative overflow-hidden h-[600px]">
+            <div className="relative overflow-hidden h-[400px]"> {/* Reduced height from 600px to 400px */}
                 {/* Background Image */}
                 <Image
                     src={image}
@@ -56,30 +56,32 @@ const CategoriesSection = () => {
     ];
 
     return (
-        <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-            <h2 className="text-center text-3xl md:text-4xl font-bold mb-12">
-                ІНТЕРНЕТ-МАГАЗИН ВЕРХНЬОГО ОДЯГУ PARADISE-STORE
-            </h2>
-            <div className="category-wall__inner">
-                {categories.map((category, index) => (
-                    <CategoryCard
-                        key={index}
-                        title={category.title}
-                        image={category.image}
-                        link={category.link}
-                    />
-                ))}
-            </div>
+        <section className="py-10">
+            <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8"> {/* Added max-width and center alignment */}
+                <h2 className="text-center text-3xl md:text-4xl font-bold mb-8">
+                    ІНТЕРНЕТ-МАГАЗИН ВЕРХНЬОГО ОДЯГУ PARADISE-STORE
+                </h2>
+                <div className="category-wall__inner">
+                    {categories.map((category, index) => (
+                        <CategoryCard
+                            key={index}
+                            title={category.title}
+                            image={category.image}
+                            link={category.link}
+                        />
+                    ))}
+                </div>
 
-            {/* About section */}
-            <div className="mt-16 max-w-4xl mx-auto text-center">
-                <h3 className="text-2xl font-semibold mb-6">Про наш магазин</h3>
-                <p className="text-gray-700 mb-4">
-                    Paradise Store - це інтернет-магазин верхнього одягу, де Ви знайдете якісні пальта, куртки, тренчі та аксесуари за доступними цінами.
-                </p>
-                <p className="text-gray-700">
-                    Ми спеціалізуємося на виробництві стильного верхнього одягу для чоловіків і жінок, дотримуючись найвищих стандартів якості та актуальних модних тенденцій.
-                </p>
+                {/* About section */}
+                <div className="mt-12 max-w-4xl mx-auto text-center">
+                    <h3 className="text-2xl font-semibold mb-6">Про наш магазин</h3>
+                    <p className="text-gray-700 mb-4">
+                        Paradise Store - це інтернет-магазин верхнього одягу, де Ви знайдете якісні пальта, куртки, тренчі та аксесуари за доступними цінами.
+                    </p>
+                    <p className="text-gray-700">
+                        Ми спеціалізуємося на виробництві стильного верхнього одягу для чоловіків і жінок, дотримуючись найвищих стандартів якості та актуальних модних тенденцій.
+                    </p>
+                </div>
             </div>
         </section>
     );

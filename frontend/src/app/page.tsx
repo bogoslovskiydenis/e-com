@@ -4,18 +4,18 @@ import CategoriesSection from "@/app/components/home/CategoryCard";
 
 export default function Home() {
     return (
-        <div className="flex flex-col items-center">
-            {/* Main banner with New Collection - centered with max width */}
+        <div className="flex flex-col">
+            {/* Main banner with New Collection */}
             <div className="w-full max-w-screen-2xl mx-auto">
                 <BannerSlider />
             </div>
 
-            {/* Categories section with the new Category Wall styling */}
-            <div className="w-full">
+            {/* Categories section with smaller images */}
+            <div className="w-full category-section">
                 <CategoriesSection />
             </div>
 
-            {/* Product sections (includes TOP SALES and SALE sections) */}
+            {/* Product sections */}
             <div className="w-full">
                 <ProductSections />
             </div>
