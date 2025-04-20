@@ -1,6 +1,6 @@
 import BannerSlider from "@/app/components/home/BannerSlider";
-import ProductSections from "@/app/components/product/ProductCard";
 import CategoriesSection from "@/app/components/home/CategoryCard";
+import ProductSections from "@/app/components/product/ProductCarousel";
 
 export default function Home() {
     return (
@@ -10,15 +10,15 @@ export default function Home() {
                 <BannerSlider />
             </div>
 
-            {/* Categories section with smaller images */}
-            <div className="w-full category-section">
+            {/* Categories section */}
+            <div className="w-full">
                 <CategoriesSection />
             </div>
 
-            {/* Product sections */}
-            <div className="w-full">
-                <ProductSections />
-            </div>
+
+
+            {/* Product sections (TOP SALES and SALE) */}
+            <ProductSections />
         </div>
     );
 }

@@ -72,16 +72,6 @@ const CategoriesSection = () => {
                     ))}
                 </div>
 
-                {/* About section */}
-                <div className="mt-12 max-w-4xl mx-auto text-center">
-                    <h3 className="text-2xl font-semibold mb-6">Про наш магазин</h3>
-                    <p className="text-gray-700 mb-4">
-                        Paradise Store - це інтернет-магазин верхнього одягу, де Ви знайдете якісні пальта, куртки, тренчі та аксесуари за доступними цінами.
-                    </p>
-                    <p className="text-gray-700">
-                        Ми спеціалізуємося на виробництві стильного верхнього одягу для чоловіків і жінок, дотримуючись найвищих стандартів якості та актуальних модних тенденцій.
-                    </p>
-                </div>
             </div>
         </section>
     );
