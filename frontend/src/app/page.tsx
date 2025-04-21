@@ -1,6 +1,7 @@
 import BannerSlider from "@/app/components/home/BannerSlider";
 import CategoriesSection from "@/app/components/home/CategoryCard";
 import ProductSections from "@/app/components/product/ProductCarousel";
+import SaleSection from "@/app/components/product/SaleSection";
 
 export default function Home() {
     return (
@@ -16,9 +17,10 @@ export default function Home() {
             </div>
 
 
-
             {/* Product sections (TOP SALES and SALE) */}
             <ProductSections />
+
+            <SaleSection />
         </div>
     );
 }
