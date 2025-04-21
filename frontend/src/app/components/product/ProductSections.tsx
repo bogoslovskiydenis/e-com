@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Heart, ShoppingBag } from "lucide-react";
 
-const ProductCarousel = () => {
+const ProductSections = () => {
     // Sample product data
     const products = [
         {
@@ -349,56 +349,108 @@ const ProductCarousel = () => {
                                     className="product-card flex-shrink-0"
                                     style={{ width: `calc((100% - 60px) / 4)` }}
                                 >
-                                    <div className="product-card__inner">
-                                        <div className="product-card__image">
-                                            <div className="relative aspect-[3/4] overflow-hidden">
-                                                {/* Product image */}
-                                                <img
-                                                    src={product.image}
-                                                    alt={product.name}
-                                                    className="w-full h-full object-cover"
-                                                />
+                                    <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+                                        {/* Product image and badges */}
+                                        <div style={{ position: 'relative', aspectRatio: '3/4', overflow: 'hidden' }}>
+                                            <img
+                                                src={product.image}
+                                                alt={product.name}
+                                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                            />
 
-                                                {/* Product badges */}
-                                                <div className="absolute top-0 left-0 flex">
-                                                    {product.isNew && (
-                                                        <span className="bg-black text-white text-xs px-2 py-1">NEW</span>
-                                                    )}
-                                                    {product.isSale && (
-                                                        <span className="bg-red-600 text-white text-xs px-2 py-1 ml-1">SALE</span>
-                                                    )}
-                                                </div>
+                                            {/* Product badges */}
+                                            <div style={{ position: 'absolute', top: 0, left: 0, display: 'flex' }}>
+                                                {product.isNew && (
+                                                    <span style={{
+                                                        backgroundColor: '#000',
+                                                        color: '#fff',
+                                                        fontSize: '0.75rem',
+                                                        padding: '0.25rem 0.5rem'
+                                                    }}>
+                                                        NEW
+                                                    </span>
+                                                )}
+                                                {product.isSale && (
+                                                    <span style={{
+                                                        backgroundColor: '#e53e3e',
+                                                        color: '#fff',
+                                                        fontSize: '0.75rem',
+                                                        padding: '0.25rem 0.5rem',
+                                                        marginLeft: '0.25rem'
+                                                    }}>
+                                                        SALE
+                                                    </span>
+                                                )}
+                                            </div>
 
-                                                {/* Action buttons */}
-                                                <div className="absolute top-1 right-1">
-                                                    <div className="flex gap-1">
-                                                        <button className="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm">
-                                                            <Heart size={16} />
-                                                        </button>
-                                                        <button className="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm">
-                                                            <ShoppingBag size={16} />
-                                                        </button>
-                                                    </div>
+                                            {/* Action buttons */}
+                                            <div style={{ position: 'absolute', top: '0.25rem', right: '0.25rem' }}>
+                                                <div style={{ display: 'flex', gap: '0.25rem' }}>
+                                                    <button style={{
+                                                        width: '2rem',
+                                                        height: '2rem',
+                                                        backgroundColor: '#fff',
+                                                        borderRadius: '9999px',
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        justifyContent: 'center',
+                                                        boxShadow: '0 1px 2px rgba(0,0,0,0.05)'
+                                                    }}>
+                                                        <Heart size={16} />
+                                                    </button>
+                                                    <button style={{
+                                                        width: '2rem',
+                                                        height: '2rem',
+                                                        backgroundColor: '#fff',
+                                                        borderRadius: '9999px',
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        justifyContent: 'center',
+                                                        boxShadow: '0 1px 2px rgba(0,0,0,0.05)'
+                                                    }}>
+                                                        <ShoppingBag size={16} />
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div className="product-card__content mt-3">
-                                            <h3 className="text-sm font-medium mb-1 line-clamp-2">{product.name}</h3>
+                                        {/* Product content */}
+                                        <div style={{
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            flexGrow: 1,
+                                            padding: '0.75rem 0'
+                                        }}>
+                                            {/* Product title - fixed height */}
+                                            <h3 style={{
+                                                fontSize: '0.875rem',
+                                                fontWeight: '500',
+                                                marginBottom: '0.25rem',
+                                                display: '-webkit-box',
+                                                WebkitLineClamp: 2,
+                                                WebkitBoxOrient: 'vertical',
+                                                overflow: 'hidden',
+                                                textOverflow: 'ellipsis',
+                                                lineHeight: '1.25',
+                                                height: '2.5rem' // Fixed height for 2 lines
+                                            }}>
+                                                {product.name}
+                                            </h3>
 
-                                            <div className="flex items-center gap-2 mb-2">
-                                                <p className="font-semibold text-sm">
+                                            {/* Price */}
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                                                <p style={{ fontWeight: '600', fontSize: '0.875rem' }}>
                                                     {formatPrice(product.price)}
                                                 </p>
                                                 {product.oldPrice && (
-                                                    <p className="text-xs text-gray-500 line-through">
+                                                    <p style={{ fontSize: '0.75rem', color: '#6b7280', textDecoration: 'line-through' }}>
                                                         {formatPrice(product.oldPrice)}
                                                     </p>
                                                 )}
                                             </div>
 
-                                            {/* Color options */}
-                                            <div className="flex gap-1 mb-3">
+                                            {/* Color options - fixed height */}
+                                            <div style={{ display: 'flex', gap: '4px', marginBottom: '12px', height: '20px' }}>
                                                 {product.colors.map(color => {
                                                     const colorMap = {
                                                         'black': '#000000',
@@ -413,10 +465,13 @@ const ProductCarousel = () => {
                                                         <button
                                                             key={color}
                                                             style={{
-                                                                backgroundColor: colorMap[color] || color,
-                                                                width: '30px',
-                                                                height: '30px',
-                                                                borderRadius: '20px'
+                                                                width: '20px',
+                                                                height: '20px',
+                                                                borderRadius: '50%',
+                                                                border: '1px solid #e5e7eb',
+                                                                cursor: 'pointer',
+                                                                margin: '0 2px',
+                                                                backgroundColor: colorMap[color] || color
                                                             }}
                                                             aria-label={`Select ${color} color`}
                                                         />
@@ -424,9 +479,18 @@ const ProductCarousel = () => {
                                                 })}
                                             </div>
 
+                                            {/* Spacer to push button to bottom */}
+                                            <div style={{ flexGrow: 1 }}></div>
 
-                                            {/* Buy button */}
-                                            <button className="w-full bg-black text-white py-2 text-xs uppercase">
+                                            {/* Buy button - always at the bottom */}
+                                            <button style={{
+                                                backgroundColor: '#000',
+                                                color: '#fff',
+                                                width: '100%',
+                                                padding: '0.5rem 0',
+                                                fontSize: '0.75rem',
+                                                textTransform: 'uppercase'
+                                            }}>
                                                 Купити
                                             </button>
                                         </div>
@@ -454,4 +518,4 @@ const ProductCarousel = () => {
     );
 };
 
-export default ProductCarousel;
+export default ProductSections;

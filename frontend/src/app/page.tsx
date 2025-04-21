@@ -1,6 +1,6 @@
 import BannerSlider from "@/app/components/home/BannerSlider";
 import CategoriesSection from "@/app/components/home/CategoryCard";
-import ProductSections from "@/app/components/product/ProductCarousel";
+import ProductSections from "@/app/components/product/ProductSections";
 import SaleSection from "@/app/components/product/SaleSection";
 
 export default function Home() {
