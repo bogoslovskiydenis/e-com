@@ -2,12 +2,10 @@
 
 import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
-import { Menu } from "lucide-react";
 
 const CategoryNav = () => {
     const [isFixed, setIsFixed] = useState(false);
     const [openCategory, setOpenCategory] = useState<string | null>(null);
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
 
     // Handle fixed header on scroll
@@ -49,7 +47,7 @@ const CategoryNav = () => {
         };
     }, []);
 
-    // Menu data
+    // Menu data structure
     const menuData = {
         "ЖІНОЧА ЛІНІЯ": {
             link: "/catalog/women",
@@ -59,7 +57,7 @@ const CategoryNav = () => {
                     items: [
                         { name: "Альпака", link: "/catalog/women/jackets/alpaca" },
                         { name: "Бомбер", link: "/catalog/women/jackets/bomber" },
-                        { name: "Вітовка", link: "/catalog/women/jackets/windbreaker" },
+                        { name: "Вітровка", link: "/catalog/women/jackets/windbreaker" },
                         { name: "Весна-осінь", link: "/catalog/women/jackets/spring-autumn" },
                         { name: "Демісезон", link: "/catalog/women/jackets/demi-season" },
                         { name: "Джинс", link: "/catalog/women/jackets/denim" },
@@ -67,8 +65,8 @@ const CategoryNav = () => {
                         { name: "Зима", link: "/catalog/women/jackets/winter" },
                         { name: "Кашемір", link: "/catalog/women/jackets/cashmere" },
                         { name: "Класика", link: "/catalog/women/jackets/classic" },
-                        { name: "Класичний", link: "/catalog/women/jackets/classic-style" },
-                        { name: "Косуха", link: "/catalog/women/jackets/biker" },
+                        { name: "Косухи", link: "/catalog/women/jackets/biker" },
+                        { name: "Короткий", link: "/catalog/women/jackets/short" },
                         { name: "Неплон", link: "/catalog/women/jackets/nylon" },
                         { name: "Пуховик", link: "/catalog/women/jackets/puffer" },
                         { name: "Сорочки", link: "/catalog/women/jackets/shirts" },
@@ -97,7 +95,6 @@ const CategoryNav = () => {
                         { name: "Еко наповнювач", link: "/catalog/women/puffer/eco-filling" },
                         { name: "Біо-наповнювач", link: "/catalog/women/puffer/bio-filling" },
                         { name: "З утеплом", link: "/catalog/women/puffer/insulated" },
-                        { name: "Зима", link: "/catalog/women/puffer/winter" },
                         { name: "Пух-перо", link: "/catalog/women/puffer/down-feather" },
                         { name: "Шкіра", link: "/catalog/women/puffer/leather" },
                     ]
@@ -119,9 +116,21 @@ const CategoryNav = () => {
             link: "/catalog/men",
             categories: [
                 {
+                    title: "КУРТКИ",
+                    items: [
+                        { name: "Бомбер", link: "/catalog/men/jackets/bomber" },
+                        { name: "Весна-осінь", link: "/catalog/men/jackets/spring-autumn" },
+                        { name: "Замш", link: "/catalog/men/jackets/suede" },
+                        { name: "Класика", link: "/catalog/men/jackets/classic" },
+                        { name: "Класичний", link: "/catalog/men/jackets/classic-style" },
+                        { name: "Косуха", link: "/catalog/men/jackets/biker" },
+                        { name: "Неплон", link: "/catalog/men/jackets/nylon" },
+                        { name: "Шкіра", link: "/catalog/men/jackets/leather" },
+                    ]
+                },
+                {
                     title: "ПАЛЬТО",
                     items: [
-                        { name: "Альпака", link: "/catalog/men/coats/alpaca" },
                         { name: "Весна-осінь", link: "/catalog/men/coats/spring-autumn" },
                         { name: "Вовна", link: "/catalog/men/coats/wool" },
                         { name: "Демісезон", link: "/catalog/men/coats/demi-season" },
@@ -136,17 +145,41 @@ const CategoryNav = () => {
                 {
                     title: "ПУХОВИКИ",
                     items: [
-                        { name: "Демісезон", link: "/catalog/men/puffer/demi-season" },
                         { name: "Еко наповнювач", link: "/catalog/men/puffer/eco-filling" },
                         { name: "Зима", link: "/catalog/men/puffer/winter" },
-                        { name: "Пух-перо", link: "/catalog/men/puffer/down-feather" },
+                        { name: "Неплон", link: "/catalog/men/puffer/nylon" },
                     ]
                 }
             ]
         },
         "АКСЕСУАРИ": {
             link: "/catalog/accessories",
-            categories: []
+            categories: [
+                {
+                    title: "СУМКИ",
+                    items: [
+                        { name: "Жіночі", link: "/catalog/accessories/bags/women" },
+                        { name: "Чоловічі", link: "/catalog/accessories/bags/men" },
+                        { name: "Шкіряні", link: "/catalog/accessories/bags/leather" },
+                    ]
+                },
+                {
+                    title: "ГАМАНЦІ",
+                    items: [
+                        { name: "Жіночі", link: "/catalog/accessories/wallets/women" },
+                        { name: "Чоловічі", link: "/catalog/accessories/wallets/men" },
+                        { name: "Шкіряні", link: "/catalog/accessories/wallets/leather" },
+                    ]
+                },
+                {
+                    title: "РУКАВИЧКИ",
+                    items: [
+                        { name: "Жіночі", link: "/catalog/accessories/gloves/women" },
+                        { name: "Чоловічі", link: "/catalog/accessories/gloves/men" },
+                        { name: "Шкіряні", link: "/catalog/accessories/gloves/leather" },
+                    ]
+                }
+            ]
         },
         "SALE": {
             link: "/sale",
@@ -158,18 +191,17 @@ const CategoryNav = () => {
         }
     };
 
+    const toggleCategory = (category: string) => {
+        if (openCategory === category) {
+            setOpenCategory(null);
+        } else {
+            setOpenCategory(category);
+        }
+    };
+
     return (
         <div ref={menuRef} className={`header-bottom ${isFixed ? 'fixed' : ''}`}>
             <div className="container">
-                {/* Mobile menu button */}
-                <button
-                    type="button"
-                    className="lg:hidden absolute left-2 top-1/2 transform -translate-y-1/2"
-                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                >
-                    <Menu className="h-6 w-6" />
-                </button>
-
                 <ul className="menu-main">
                     {Object.entries(menuData).map(([category, data], index) => (
                         <li
@@ -188,28 +220,30 @@ const CategoryNav = () => {
                 </ul>
             </div>
 
-            {/* Dropdown menu */}
+            {/* Dropdown menu area */}
             {openCategory && menuData[openCategory]?.categories.length > 0 && (
-                <div className="simple-dropdown-menu">
-                    <div className="simple-dropdown-content">
-                        {menuData[openCategory].categories.map((category, idx) => (
-                            <div key={idx} className="category-column">
-                                <h3 className="category-title">{category.title}</h3>
-                                <ul className="category-list">
-                                    {category.items.map((item, itemIdx) => (
-                                        <li key={itemIdx}>
-                                            <Link
-                                                href={item.link}
-                                                className="category-link"
-                                                onClick={() => setOpenCategory(null)}
-                                            >
-                                                {item.name}
-                                            </Link>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        ))}
+                <div className="dropdown-menu">
+                    <div className="container mx-auto py-5">
+                        <div className="flex justify-center space-x-12">
+                            {menuData[openCategory].categories.map((category, idx) => (
+                                <div key={idx} className="min-w-[180px]">
+                                    <h4 className="dropdown-title">{category.title}</h4>
+                                    <ul className="dropdown-items">
+                                        {category.items.map((item, itemIdx) => (
+                                            <li key={itemIdx}>
+                                                <Link
+                                                    href={item.link}
+                                                    className="dropdown-link"
+                                                    onClick={() => setOpenCategory(null)}
+                                                >
+                                                    {item.name}
+                                                </Link>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             )}
