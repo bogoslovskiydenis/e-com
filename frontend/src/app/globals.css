@@ -94,6 +94,7 @@ button, input, optgroup, select, textarea {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .header-middle__contact {
@@ -115,8 +116,20 @@ button, input, optgroup, select, textarea {
   margin: 0 0 0 20px;
 }
 
+/* Header logo container */
+.header-middle .logo-container {
+  display: flex;
+  align-items: center;
+}
+
 .search-btn {
   display: none;
+}
+
+/* Header icons container */
+.header-middle .header-icons {
+  display: flex;
+  align-items: center;
 }
 
 .header-bottom {
@@ -124,6 +137,7 @@ button, input, optgroup, select, textarea {
   border-top: 1px solid var(--grey-light);
   border-bottom: 1px solid var(--grey-light);
   background: var(--white);
+  position: relative;
 }
 
 /* Search box */
@@ -177,12 +191,40 @@ button, input, optgroup, select, textarea {
   list-style: none;
   padding: 0;
   margin: 0 auto 0 0;
+  flex-wrap: wrap;
 }
 
 .menu-top__item {
   margin-right: 20px;
+  margin-bottom: 5px;
 }
 
+.menu-top__item a {
+  transition: color 0.2s ease;
+  position: relative;
+}
+
+.menu-top__item a:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Optional underline effect on hover */
+.menu-top__item a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: white;
+  transition: width 0.3s ease;
+}
+
+.menu-top__item a:hover::after {
+  width: 100%;
+}
+
+/* Menu main styles */
 .menu-main {
   display: flex;
   justify-content: center;
@@ -195,6 +237,7 @@ button, input, optgroup, select, textarea {
 
 .menu-main__item {
   margin: 0 20px;
+  position: relative;
 }
 
 .menu-main__link {
@@ -206,69 +249,95 @@ button, input, optgroup, select, textarea {
   padding: 18px 0;
   position: relative;
   margin: -2px 0 0;
+  transition: color 0.2s ease-out;
+}
+
+.menu-main__link:hover {
+  color: #4a4a4a;
 }
 
 /* Slideshow */
+/* Banner slider specific styles */
 .slideshow {
   position: relative;
+  width: 100%;
+  max-width: 1536px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .slideshow__slide {
   display: block;
   width: 100%;
+  height: 100%;
 }
 
-/* Swiper/Slider styles */
-.swiper-button-next, .swiper-button-prev {
-  position: absolute;
-  top: 50%;
-  z-index: 10;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 0;
-  padding: 0;
-  margin: 0;
-  width: 44px;
-  height: 44px;
-  background: var(--grey-light);
-  transform: translate(0, -50%);
-  -webkit-appearance: button;
+/* Swiper Banner Styles */
+
+/* Add these to your CSS file to customize Swiper navigation buttons */
+.slideshow-container .swiper-button-prev,
+.slideshow-container .swiper-button-next {
+  width: 32px !important;
+  height: 32px !important;
+  background-color: rgba(245, 245, 245, 0.8) !important;
+  border-radius: 50% !important;
+  color: #000 !important;
 }
 
-.swiper-button-prev, .swiper-rtl .swiper-button-next {
-  left: 10px;
-  right: auto;
+.slideshow-container .swiper-button-prev:hover,
+.slideshow-container .swiper-button-next:hover {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  color: #fff !important;
 }
 
-.swiper-button-next, .swiper-rtl .swiper-button-prev {
-  right: 10px;
-  left: auto;
+/* Make the buttons smaller */
+.slideshow-container .swiper-button-prev::after,
+.slideshow-container .swiper-button-next::after {
+  font-size: 16px !important;
+  font-weight: bold !important;
 }
 
-.swiper-button-next:hover, .swiper-button-prev:hover {
-  background: var(--black);
-  color: var(--white);
+/* Position adjustments */
+.slideshow-container .swiper-button-prev {
+  left: 16px !important;
 }
 
-.swiper-button-next::after, .swiper-button-prev::after {
-  display: none;
+.slideshow-container .swiper-button-next {
+  right: 16px !important;
 }
 
-.slideshow .swiper-slide {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* Pagination styles */
+.slideshow-container .swiper-pagination-bullet {
+  width: 8px !important;
+  height: 8px !important;
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  opacity: 0.5 !important;
 }
 
-/* Fixed header animation */
-@keyframes slideDown {
-  from {
-    transform: translateY(-100%);
+.slideshow-container .swiper-pagination-bullet-active {
+  background-color: #fff !important;
+  opacity: 1 !important;
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+  .slideshow-container .swiper-button-prev,
+  .slideshow-container .swiper-button-next {
+    width: 40px !important;
+    height: 40px !important;
   }
-  to {
-    transform: translateY(0);
+
+  .slideshow-container .swiper-button-prev::after,
+  .slideshow-container .swiper-button-next::after {
+    font-size: 18px !important;
+  }
+
+  .slideshow-container .swiper-button-prev {
+    left: 20px !important;
+  }
+
+  .slideshow-container .swiper-button-next {
+    right: 20px !important;
   }
 }
 
@@ -280,8 +349,8 @@ button, input, optgroup, select, textarea {
   z-index: 1000;
   animation: slideDown 0.3s forwards;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background: white;
 }
-
 
 .max-w-screen-2xl {
   max-width: 1536px;
@@ -289,64 +358,7 @@ button, input, optgroup, select, textarea {
   margin-right: auto;
 }
 
-/* Slideshow */
-.slideshow {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-}
-
-.slideshow__slide {
-  display: block;
-  width: 100%;
-}
-
-/* Swiper/Slider styles adjustments */
-.swiper-button-next, .swiper-button-prev {
-  position: absolute;
-  top: 50%;
-  z-index: 10;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 0;
-  padding: 0;
-  margin: 0;
-  width: 44px;
-  height: 44px;
-  background: var(--grey-light);
-  transform: translate(0, -50%);
-  -webkit-appearance: button;
-  /* Make sure buttons stay within content area */
-  margin: 0 20px;
-}
-
-.swiper-button-prev, .swiper-rtl .swiper-button-next {
-  left: 20px;
-  right: auto;
-}
-
-.swiper-button-next, .swiper-rtl .swiper-button-prev {
-  right: 20px;
-  left: auto;
-}
-
-.swiper-button-next:hover, .swiper-button-prev:hover {
-  background: var(--black);
-  color: var(--white);
-}
-
-.swiper-button-next::after, .swiper-button-prev::after {
-  display: none;
-}
-
-.slideshow .swiper-slide {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
+/* Category Wall */
 .category-wall__inner {
   display: flex;
   flex-wrap: wrap;
@@ -395,47 +407,11 @@ button, input, optgroup, select, textarea {
   border-color: var(--white);
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .category-wall__inner {
-    margin: -5px 0 0;
-  }
-
-  .category-wall__item {
-    flex: 0 0 100%;
-    margin-bottom: 10px;
-  }
-
-  .category-wall__title {
-    font-size: 30px;
-  }
-
-  .category-wall__wrap {
-    padding: 0 15px 30px;
-  }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-  .category-wall__item {
-    flex: 0 0 50%;
-  }
-
-  .category-wall__title {
-    font-size: 36px;
-  }
-}
-
 /* Footer styles */
 .footer {
   padding: 60px 0 100px;
   background: var(--black);
   color: white;
-}
-
-.container {
-  max-width: 1350px;
-  padding: 0 15px;
-  margin: 0 auto;
 }
 
 .footer__wrap {
@@ -471,7 +447,7 @@ button, input, optgroup, select, textarea {
 }
 
 .footer a {
-  color: white; /* Tailwind blue-500 */
+  color: white;
   text-decoration: none;
 }
 
@@ -527,88 +503,6 @@ button, input, optgroup, select, textarea {
   text-align: center;
   font-size: 14px;
   color: #a0aec0; /* Tailwind gray-400 */
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .footer__wrap {
-    flex-direction: column;
-  }
-
-  .footer__column, .footer__contacts {
-    flex: 0 0 100%;
-    margin-bottom: 30px;
-  }
-
-  .footer__payment {
-    justify-content: center;
-  }
-}
-
-
-/* Simple dropdown menu styles - Add to globals.css */
-
-/* Menu main styles */
-.menu-main {
-  display: flex;
-  justify-content: center;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  position: relative;
-  height: 100%;
-
-}
-
-.menu-main__item {
-  margin: 0 20px;
-  position: relative;
-}
-
-.menu-main__link {
-  display: block;
-  font-size: 20px;
-  font-weight: 600;
-  text-transform: uppercase;
-  color: var(--black);
-  padding: 18px 0;
-  position: relative;
-  margin: -2px 0 0;
-  transition: color 0.2s ease-out;
-}
-
-.menu-main__link:hover {
-  color: #4a4a4a;
-}
-
-/* Fixed header animation */
-.fixed {
-  position: fixed;
-  top: 0;
-  left: 0;
-  /*width: 100%;*/
-  z-index: 1000;
-  animation: slideDown 0.3s forwards;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  background: white;
-}
-
-@keyframes slideDown {
-  from {
-    transform: translateY(-100%);
-  }
-  to {
-    transform: translateY(0);
-  }
-}
-
-/* Dropdown menu styling */
-.header-bottom {
-  height: 62px;
-  border-top: 1px solid var(--grey-light);
-  border-bottom: 1px solid var(--grey-light);
-  background: var(--white);
-  position: relative;
 }
 
 /* Simple dropdown menu */
@@ -668,34 +562,134 @@ button, input, optgroup, select, textarea {
   color: #000;
 }
 
-/* Responsive styles */
-@media (max-width: 1024px) {
-  .menu-main {
+/* Responsive adjustments */
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  .menu-top {
+    display: none;
+  }
+
+  .header-top .container > div > div {
+    width: 100%;
     justify-content: center;
-    padding-left: 40px; /* Space for mobile menu button */
   }
 
-  .menu-main__item {
-    margin: 0 10px;
+  /* Small mobile header-middle */
+  .header-middle > .container {
+    flex-direction: column;
+    padding: 10px 0;
   }
 
-  .menu-main__link {
-    font-size: 16px;
+  .header-middle .logo-container img {
+    height: 30px !important; /* Override the default height */
+    width: auto;
   }
 
-  .simple-dropdown-content {
-    flex-wrap: wrap;
-    padding: 20px;
+  .search-box-wrapper {
+    width: 100%;
+    max-width: 100%;
+    margin: 10px 0;
+    order: 3;
   }
 
-  .category-column {
-    margin-bottom: 20px;
+  .header-middle__contact {
+    order: 2;
+    margin: 8px 0;
+    text-align: center;
+    width: 100%;
+    align-items: center;
+  }
+
+  .header-middle .header-icons {
+    order: 4;
+    width: 100%;
+    justify-content: center;
+    margin-top: 10px;
   }
 }
 
+/* Mobile devices */
 @media (max-width: 768px) {
+  .category-wall__inner {
+    margin: -5px 0 0;
+  }
+
+  .category-wall__item {
+    flex: 0 0 100%;
+    margin-bottom: 10px;
+  }
+
+  .category-wall__title {
+    font-size: 30px;
+  }
+
+  .category-wall__wrap {
+    padding: 0 15px 30px;
+  }
+
+  .footer__wrap {
+    flex-direction: column;
+  }
+
+  .footer__column, .footer__contacts {
+    flex: 0 0 100%;
+    margin-bottom: 30px;
+  }
+
+  .footer__payment {
+    justify-content: center;
+  }
+
   .header-bottom {
     height: auto;
+  }
+
+  /* Header-middle mobile styles */
+  .header-middle > .container {
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .header-middle .logo-container img {
+    height: 35px;
+    width: auto;
+  }
+
+  .search-box-wrapper {
+    order: 3;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 10px;
+  }
+
+  .header-middle__contact {
+    font-size: 12px;
+  }
+
+  .header-middle__btn {
+    padding: 0 10px 0 0;
+  }
+
+  .header-middle__btn + .header-middle__btn {
+    margin: 0 0 0 10px;
+  }
+
+  /* Top menu responsive styles */
+  .menu-top {
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 10px;
+    align-items: center;
+  }
+
+  .menu-top__item {
+    margin: 5px 0;
+    text-align: center;
+    width: 100%;
+  }
+
+  .header-top .container > div {
+    flex-direction: column;
   }
 
   .menu-main {
@@ -725,5 +719,62 @@ button, input, optgroup, select, textarea {
     width: 100%;
     padding: 0;
     margin-bottom: 30px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .category-wall__item {
+    flex: 0 0 50%;
+  }
+
+  .category-wall__title {
+    font-size: 36px;
+  }
+
+  /* Tablet header-middle styles */
+  .header-middle .logo-container img {
+    height: 40px;
+    width: auto;
+  }
+
+  .search-box-wrapper {
+    max-width: 300px;
+  }
+
+  .header-middle__contact {
+    font-size: 13px;
+  }
+
+  /* Tablet menu styles */
+  .menu-top {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .menu-top__item {
+    margin: 0 10px 5px;
+    font-size: 11px;
+  }
+
+  .menu-main {
+    justify-content: center;
+    padding-left: 40px; /* Space for mobile menu button */
+  }
+
+  .menu-main__item {
+    margin: 0 10px;
+  }
+
+  .menu-main__link {
+    font-size: 16px;
+  }
+
+  .simple-dropdown-content {
+    flex-wrap: wrap;
+    padding: 20px;
+  }
+
+  .category-column {
+    margin-bottom: 20px;
   }
 }

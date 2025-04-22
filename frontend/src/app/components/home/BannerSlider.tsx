@@ -1,13 +1,16 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useRef, useEffect } from "react";
 import Link from "next/link";
+import { register } from 'swiper/element/bundle';
+
+// Register Swiper web components
+register();
 
 const BannerSlider = () => {
-    const [currentSlide, setCurrentSlide] = useState(0);
-    const sliderRef = useRef<HTMLDivElement>(null);
+    const swiperElRef = useRef(null);
 
-    // Массив баннеров для слайдера
+    // Banner data
     const banners = [
         {
             id: 1,
@@ -29,69 +32,68 @@ const BannerSlider = () => {
         }
     ];
 
-    // Автоматическое переключение слайдов
     useEffect(() => {
-        const timer = setInterval(() => {
-            setCurrentSlide((prev) => (prev + 1) % banners.length);
-        }, 5000); // Переключение каждые 5 секунд
+        // Configure Swiper parameters
+        const swiperEl = swiperElRef.current;
 
-        return () => clearInterval(timer);
-    }, [banners.length]);
+        const swiperParams = {
+            slidesPerView: 1,
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            effect: 'fade',
+            fadeEffect: {
+                crossFade: true
+            },
+            on: {
+                init() {
+                    // ... any initialization code
+                },
+            },
+        };
 
-    // Переключение на предыдущий слайд
-    const prevSlide = () => {
-        setCurrentSlide((prev) => (prev - 1 + banners.length) % banners.length);
-    };
+        // Apply parameters
+        Object.assign(swiperEl, swiperParams);
 
-    // Переключение на следующий слайд
-    const nextSlide = () => {
-        setCurrentSlide((prev) => (prev + 1) % banners.length);
-    };
+        // Initialize Swiper
+        swiperEl.initialize();
+    }, []);
 
     return (
-        <div className="slideshow relative max-w-screen-2xl mx-auto">
-            {/* Контейнер для слайдера */}
-            <div ref={sliderRef} className="relative h-[350px] w-full overflow-hidden">
-                {/* Слайды */}
-                <div className="swiper-wrapper">
-                    {banners.map((banner, index) => (
-                        <div
-                            key={banner.id}
-                            className={`swiper-slide absolute inset-0 transition-opacity duration-500 ${
-                                index === currentSlide ? "opacity-100" : "opacity-0"
-                            }`}
-                        >
-                            <Link href={banner.link} className="slideshow__slide block w-full h-full">
-                                <img
-                                    src={banner.image}
-                                    alt={banner.alt}
-                                    className="w-full h-full object-cover"
-                                />
-                            </Link>
-                        </div>
-                    ))}
-                </div>
+        <div className="slideshow-container max-w-screen-2xl mx-auto relative">
+            <swiper-container
+                ref={swiperElRef}
+                class="relative  w-full overflow-hidden"
+            >
+                {banners.map((banner) => (
+                    <swiper-slide key={banner.id}>
+                        <Link href={banner.link} className="block w-full h-full">
+                            <img
+                                src={banner.image}
+                                alt={banner.alt}
+                                className="w-full h-full object-cover"
+                            />
+                        </Link>
+                    </swiper-slide>
+                ))}
 
-                {/* Кнопки навигации - теперь с дополнительным отступом от края */}
-                <button
-                    onClick={prevSlide}
-                    className="swiper-button-prev left-8"
-                    aria-label="Предыдущий слайд"
-                >
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                </button>
-                <button
-                    onClick={nextSlide}
-                    className="swiper-button-next right-8"
-                    aria-label="Следующий слайд"
-                >
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                </button>
-            </div>
+                {/* Swiper navigation buttons */}
+                <div className="swiper-button-prev"></div>
+                <div className="swiper-button-next"></div>
+
+                {/* Optional pagination dots */}
+                <div className="swiper-pagination"></div>
+            </swiper-container>
         </div>
     );
 };
